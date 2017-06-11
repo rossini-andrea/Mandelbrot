@@ -1,4 +1,22 @@
-﻿namespace Mandelbrot
+﻿/*
+    Mandelbrot.exe - A Mandelbrot Set generator.
+    Copyright (C) 2017 Andrea Rossini
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+namespace Mandelbrot
 {
 	partial class Form1
 	{
@@ -34,9 +52,9 @@
 			this.homeButton = new System.Windows.Forms.Button();
 			this.optionsPanel.SuspendLayout();
 			this.SuspendLayout();
-			// 
+			//
 			// optionsPanel
-			// 
+			//
 			this.optionsPanel.BackColor = System.Drawing.Color.White;
 			this.optionsPanel.Controls.Add(this.statusInfoLabel);
 			this.optionsPanel.Controls.Add(this.homeButton);
@@ -49,9 +67,9 @@
 			this.optionsPanel.Size = new System.Drawing.Size(210, 493);
 			this.optionsPanel.TabIndex = 0;
 			this.optionsPanel.Visible = false;
-			// 
+			//
 			// statusInfoLabel
-			// 
+			//
 			this.statusInfoLabel.AutoSize = true;
 			this.statusInfoLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.statusInfoLabel.Location = new System.Drawing.Point(26, 13);
@@ -60,9 +78,9 @@
 			this.statusInfoLabel.Size = new System.Drawing.Size(43, 17);
 			this.statusInfoLabel.TabIndex = 1;
 			this.statusInfoLabel.Text = "label1";
-			// 
+			//
 			// homeButton
-			// 
+			//
 			this.homeButton.FlatAppearance.BorderSize = 0;
 			this.homeButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
 			this.homeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -75,9 +93,9 @@
 			this.homeButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.homeButton.UseVisualStyleBackColor = true;
 			this.homeButton.Click += new System.EventHandler(this.homeButton_Click);
-			// 
+			//
 			// Form1
-			// 
+			//
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(671, 493);
