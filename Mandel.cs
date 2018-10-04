@@ -31,42 +31,12 @@ namespace Mandelbrot
 		private static int m_maxThreads = 6;
 		private static int m_maxIters = 2000;
 
-		public static void LoadPalette()
-		{
-			m_palette = new int[1536];
+        public static void SetPalette(int[] value)
+        {
+            m_palette = value ?? throw new ArgumentNullException("value");
+        }
 
-			for (var i = 0; i < 256; ++i)
-			{
-				m_palette[i] = 255 | (i << 8) | (i << 16);
-			}
-
-			for (var i = 0; i < 256; ++i)
-			{
-				m_palette[i + 256] = (255 - i) | ((255 - i) << 8) | (0 << 16);//0 | ((255 - i) << 8) | ((255 - i) << 16);
-			}
-
-			for (var i = 0; i < 256; ++i)
-			{
-				m_palette[i + 512] = 255 | (i << 8) | (i << 16);
-			}
-
-			for (var i = 0; i < 256; ++i)
-			{
-				m_palette[i + 768] = (255 - i) | ((255 - i) << 8) | (0 << 16);//0 | ((255 - i) << 8) | ((255 - i) << 16);
-			}
-
-			for (var i = 0; i < 256; ++i)
-			{
-				m_palette[i + 1024] = 255 | (i << 8) | (i << 16);
-			}
-
-			for (var i = 0; i < 256; ++i)
-			{
-				m_palette[i + 1280] = (255 - i) | ((255 - i) << 8) | (0 << 16);//0 | ((255 - i) << 8) | ((255 - i) << 16);
-			}
-		}
-
-		private static int[] GeneratePictureInternal(
+        private static int[] GeneratePictureInternal(
 			double xbase, double ybase, double scale,
 			int w, int h,
 			int firstY, int lastY,
@@ -123,10 +93,16 @@ namespace Mandelbrot
 				{
 					for (int j = 0; j <= scores[i]; ++j)
 					{
-						color += (double)hist[j] / total;
+						color += (double)hist[j];
 					}
 
-					remap[scores[i]] = color;
+                    color /= total;
+
+                    color = color < 0.000001 ? 0 :
+                            color > 0.999999 ? 1 :
+                            color;
+
+                    remap[scores[i]] = color;
 				}
 				else
 				{

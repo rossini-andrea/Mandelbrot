@@ -46,77 +46,106 @@ namespace Mandelbrot
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-			this.optionsPanel = new System.Windows.Forms.FlowLayoutPanel();
-			this.statusInfoLabel = new System.Windows.Forms.Label();
-			this.homeButton = new System.Windows.Forms.Button();
-			this.optionsPanel.SuspendLayout();
-			this.SuspendLayout();
-			//
-			// optionsPanel
-			//
-			this.optionsPanel.BackColor = System.Drawing.Color.White;
-			this.optionsPanel.Controls.Add(this.statusInfoLabel);
-			this.optionsPanel.Controls.Add(this.homeButton);
-			this.optionsPanel.Dock = System.Windows.Forms.DockStyle.Left;
-			this.optionsPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-			this.optionsPanel.Location = new System.Drawing.Point(0, 0);
-			this.optionsPanel.Margin = new System.Windows.Forms.Padding(0);
-			this.optionsPanel.Name = "optionsPanel";
-			this.optionsPanel.Padding = new System.Windows.Forms.Padding(23, 13, 12, 13);
-			this.optionsPanel.Size = new System.Drawing.Size(210, 493);
-			this.optionsPanel.TabIndex = 0;
-			this.optionsPanel.Visible = false;
-			//
-			// statusInfoLabel
-			//
-			this.statusInfoLabel.AutoSize = true;
-			this.statusInfoLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.statusInfoLabel.Location = new System.Drawing.Point(26, 13);
-			this.statusInfoLabel.MaximumSize = new System.Drawing.Size(170, 0);
-			this.statusInfoLabel.Name = "statusInfoLabel";
-			this.statusInfoLabel.Size = new System.Drawing.Size(43, 17);
-			this.statusInfoLabel.TabIndex = 1;
-			this.statusInfoLabel.Text = "label1";
-			//
-			// homeButton
-			//
-			this.homeButton.FlatAppearance.BorderSize = 0;
-			this.homeButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
-			this.homeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.homeButton.Location = new System.Drawing.Point(26, 34);
-			this.homeButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-			this.homeButton.Name = "homeButton";
-			this.homeButton.Size = new System.Drawing.Size(170, 30);
-			this.homeButton.TabIndex = 0;
-			this.homeButton.Text = "Home";
-			this.homeButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.homeButton.UseVisualStyleBackColor = true;
-			this.homeButton.Click += new System.EventHandler(this.homeButton_Click);
-			//
-			// Form1
-			//
-			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(671, 493);
-			this.Controls.Add(this.optionsPanel);
-			this.DoubleBuffered = true;
-			this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.KeyPreview = true;
-			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-			this.Name = "Form1";
-			this.Text = "Mandelbrot set";
-			this.Load += new System.EventHandler(this.Form1_Load);
-			this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
-			this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
-			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
-			this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
-			this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
-			this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
-			this.optionsPanel.ResumeLayout(false);
-			this.optionsPanel.PerformLayout();
-			this.ResumeLayout(false);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.optionsPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.statusInfoLabel = new System.Windows.Forms.Label();
+            this.homeButton = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.paletteCombo = new System.Windows.Forms.ComboBox();
+            this.optionsPanel.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // optionsPanel
+            // 
+            this.optionsPanel.BackColor = System.Drawing.Color.White;
+            this.optionsPanel.Controls.Add(this.statusInfoLabel);
+            this.optionsPanel.Controls.Add(this.homeButton);
+            this.optionsPanel.Controls.Add(this.saveButton);
+            this.optionsPanel.Controls.Add(this.paletteCombo);
+            this.optionsPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.optionsPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.optionsPanel.Location = new System.Drawing.Point(0, 0);
+            this.optionsPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.optionsPanel.Name = "optionsPanel";
+            this.optionsPanel.Padding = new System.Windows.Forms.Padding(23, 13, 12, 13);
+            this.optionsPanel.Size = new System.Drawing.Size(210, 493);
+            this.optionsPanel.TabIndex = 0;
+            this.optionsPanel.Visible = false;
+            // 
+            // statusInfoLabel
+            // 
+            this.statusInfoLabel.AutoSize = true;
+            this.statusInfoLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.statusInfoLabel.Location = new System.Drawing.Point(26, 13);
+            this.statusInfoLabel.MaximumSize = new System.Drawing.Size(170, 0);
+            this.statusInfoLabel.Name = "statusInfoLabel";
+            this.statusInfoLabel.Size = new System.Drawing.Size(43, 17);
+            this.statusInfoLabel.TabIndex = 1;
+            this.statusInfoLabel.Text = "label1";
+            // 
+            // homeButton
+            // 
+            this.homeButton.FlatAppearance.BorderSize = 0;
+            this.homeButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.homeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.homeButton.Location = new System.Drawing.Point(26, 34);
+            this.homeButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.homeButton.Name = "homeButton";
+            this.homeButton.Size = new System.Drawing.Size(170, 30);
+            this.homeButton.TabIndex = 0;
+            this.homeButton.Text = "Home";
+            this.homeButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.homeButton.UseVisualStyleBackColor = true;
+            this.homeButton.Click += new System.EventHandler(this.homeButton_Click);
+            // 
+            // saveButton
+            // 
+            this.saveButton.FlatAppearance.BorderSize = 0;
+            this.saveButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveButton.Location = new System.Drawing.Point(26, 72);
+            this.saveButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(170, 30);
+            this.saveButton.TabIndex = 3;
+            this.saveButton.Text = "Save";
+            this.saveButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // paletteCombo
+            // 
+            this.paletteCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.paletteCombo.FormattingEnabled = true;
+            this.paletteCombo.Location = new System.Drawing.Point(26, 109);
+            this.paletteCombo.Name = "paletteCombo";
+            this.paletteCombo.Size = new System.Drawing.Size(170, 25);
+            this.paletteCombo.TabIndex = 2;
+            this.paletteCombo.SelectedIndexChanged += new System.EventHandler(this.paletteCombo_SelectedIndexChanged);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(671, 493);
+            this.Controls.Add(this.optionsPanel);
+            this.DoubleBuffered = true;
+            this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Name = "Form1";
+            this.Text = "Mandelbrot set";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
+            this.optionsPanel.ResumeLayout(false);
+            this.optionsPanel.PerformLayout();
+            this.ResumeLayout(false);
 
 		}
 
@@ -125,6 +154,8 @@ namespace Mandelbrot
 		private System.Windows.Forms.FlowLayoutPanel optionsPanel;
 		private System.Windows.Forms.Button homeButton;
 		private System.Windows.Forms.Label statusInfoLabel;
-	}
+        private System.Windows.Forms.ComboBox paletteCombo;
+        private System.Windows.Forms.Button saveButton;
+    }
 }
 

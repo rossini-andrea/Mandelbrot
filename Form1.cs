@@ -17,7 +17,9 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -51,8 +53,11 @@ namespace Mandelbrot
 			m_xbase = -1 - ClientSize.Width * m_scale / 2;
 			m_ybase = 0 - ClientSize.Height * m_scale / 2;
 
-			Mandel.LoadPalette();
-			RunRedraw();
+            paletteCombo.DataSource = new BindingSource(PaletteGenerator.Palettes, null);
+            paletteCombo.DisplayMember = "Key";
+            paletteCombo.ValueMember = "Value";
+            Mandel.SetPalette(PaletteGenerator.Palettes["Default"]());
+            RunRedraw();
 		}
 
 		// RunRedraw - Sempre in th GUI
@@ -103,19 +108,21 @@ namespace Mandelbrot
 			e.Graphics.DrawImage(m_currentpicture, e.ClipRectangle.X, e.ClipRectangle.Y, e.ClipRectangle, GraphicsUnit.Pixel);
 
 			if (m_selecting)
-			using (var p = new Pen(Color.Red, 2))
-			{
-				e.Graphics.DrawRectangle(
-					p,
-					new Rectangle(
-						m_selrect.Width >= 0 ? m_selrect.X : m_selrect.X + m_selrect.Width,
-						m_selrect.Height >= 0 ? m_selrect.Y : m_selrect.Y + m_selrect.Height,
-						Math.Abs(m_selrect.Width)-1,
-						Math.Abs(m_selrect.Height)-1
-					)
-				);
-			}
-		}
+            {
+                using (var p = new Pen(Color.Red, 2))
+			    {
+				    e.Graphics.DrawRectangle(
+					    p,
+					    new Rectangle(
+						    m_selrect.Width >= 0 ? m_selrect.X : m_selrect.X + m_selrect.Width,
+						    m_selrect.Height >= 0 ? m_selrect.Y : m_selrect.Y + m_selrect.Height,
+						    Math.Abs(m_selrect.Width)-1,
+						    Math.Abs(m_selrect.Height)-1
+					    )
+				    );
+			    }
+            }
+        }
 
 		private void Form1_ResizeEnd(object sender, EventArgs e)
 		{
@@ -197,5 +204,21 @@ namespace Mandelbrot
 
 			RunRedraw();
 		}
-	}
+
+        private void paletteCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Mandel.SetPalette(((Func<int[]>)(paletteCombo.SelectedValue))());
+            }
+            catch { return; }
+            optionsPanel.Visible = false;
+            RunRedraw();
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            m_currentpicture.Save("c:\\temp\\mandel.png", ImageFormat.Png);
+        }
+    }
 }
