@@ -109,17 +109,15 @@ namespace Mandelbrot
 
 			if (m_selecting)
             {
-                using (var p = new Pen(Color.Red, 2))
+                using (var p = new Pen(Color.Red, 1))
 			    {
-				    e.Graphics.DrawRectangle(
-					    p,
-					    new Rectangle(
-						    m_selrect.Width >= 0 ? m_selrect.X : m_selrect.X + m_selrect.Width,
-						    m_selrect.Height >= 0 ? m_selrect.Y : m_selrect.Y + m_selrect.Height,
-						    Math.Abs(m_selrect.Width)-1,
-						    Math.Abs(m_selrect.Height)-1
-					    )
-				    );
+                    var rect = new Rectangle(
+                            m_selrect.Width >= 0 ? m_selrect.X : m_selrect.X + m_selrect.Width,
+                            m_selrect.Height >= 0 ? m_selrect.Y : m_selrect.Y + m_selrect.Height,
+                            Math.Abs(m_selrect.Width) - 1,
+                            Math.Abs(m_selrect.Height) - 1
+                        );
+                    e.Graphics.DrawRectangle(p, rect);
 			    }
             }
         }

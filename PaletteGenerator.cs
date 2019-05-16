@@ -30,10 +30,24 @@ namespace Mandelbrot
         private static Dictionary<string, Func<int[]>> m_palettes = new Dictionary<string, Func<int[]>>
         {
             { "Default" , LoadDefaultPalette },
-            { "BloodRed" , LoadBloodPalette },
-            { "DeepBlue", LoadDeepBlue },
-            { "BlueNeon", LoadBlueNeon }
+            { "Blood Red" , LoadBloodPalette },
+            { "Deep Blue", LoadDeepBlue },
+            { "Blue Neon", LoadBlueNeon },
+            { "Blue Neon 2", LoadBlueNeon2 },
+            { "256 Shades of Grey", LoadMrGrey }
         };
+
+        private static int[] LoadMrGrey()
+        {
+            var result = new int[256];
+
+            for (var i = 0; i < 256; ++i)
+            {
+                result[255 - i] = i | (i << 8) | (i << 16);
+            }
+
+            return result;
+        }
 
         public static IReadOnlyDictionary<string, Func<int[]>> Palettes
         {
@@ -56,20 +70,48 @@ namespace Mandelbrot
 
             return result;
         }
+
         private static int[] LoadBlueNeon()
         {
             var result = new int[65536];
 
             for (var i = 0; i < 65536; ++i)
             {
-                var a = (i * Math.PI) / 131072;
+                var a = (i * Math.PI) / (65536 * 2);
                 var r = (int)((1 - Math.Cos(a)) * 255);
-                var g = (int)((Math.Sin(a * 2 - Math.PI / 2) / 2 + 0.5) * 255);
+                //var g = (int)((Math.Sin(a * 2 - Math.PI / 2) / 2 + 0.5) * 255);
+                var g = i >> 8;
                 var b = (int)(Math.Sin(a) * 255);
                 result[i] = b | (g << 8) | (r << 16);
             }
 
             result[65535] = 0;
+
+            return result;
+        }
+
+        private static int[] LoadBlueNeon2()
+        {
+            var result = new int[65536];
+
+            for (var i = 0; i < 32768; ++i)
+            {
+                var a = (i * Math.PI) / (65536 * 2);
+                var r = (int)((1 - Math.Cos(a)) * 255);
+                var g = (int)((Math.Sin(a * 2 - Math.PI / 2) / 2 + 0.5) * 255);
+                var b = (int)(Math.Sin(a) * 255);
+                result[i] = b | (g << 8) | (r << 16);
+                result[65535 - i] = b | (g << 8) | (r << 16);
+            }
+
+ //           for (var i = 0; i < 8192; ++i)
+ //           {
+ //               var a = ((8191 - i) * Math.PI) / (8192 * 2);
+ //               var r = (int)((1 - Math.Cos(a)) * 255);
+ //               var g = (int)((Math.Sin(a * 2 - Math.PI / 2) / 2 + 0.5) * 255);
+ //               var b = (int)(Math.Sin(a) * 255);
+ //               result[57344 + i] = b | (g << 8) | (r << 16);
+ //           }
 
             return result;
         }

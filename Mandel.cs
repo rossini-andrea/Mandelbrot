@@ -29,7 +29,7 @@ namespace Mandelbrot
 		private static int[] m_palette;
 
 		private static int m_maxThreads = 6;
-		private static int m_maxIters = 2000;
+		private static int m_maxIters = 20000;
 
         public static void SetPalette(int[] value)
         {
