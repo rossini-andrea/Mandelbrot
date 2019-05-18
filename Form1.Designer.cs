@@ -16,34 +16,49 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using System;
+using System.IO;
+
 namespace Mandelbrot
 {
-	partial class Form1
-	{
-		/// <summary>
-		/// Variabile di progettazione necessaria.
-		/// </summary>
-		private System.ComponentModel.IContainer components = null;
+    partial class Form1
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
 
-		/// <summary>
-		/// Pulire le risorse in uso.
-		/// </summary>
-		/// <param name="disposing">ha valore true se le risorse gestite devono essere eliminate, false in caso contrario.</param>
-		protected override void Dispose(bool disposing)
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        /// <summary>
+        /// Hack after moving to .Net Core 3.!-- Doesn't yet work
+        /// </summary>
+		private System.Drawing.Icon Base64ToImage(string base64String)
 		{
-			if (disposing && (components != null))
-			{
-				components.Dispose();
-			}
-			base.Dispose(disposing);
+			byte[] imageBytes = Convert.FromBase64String(base64String);
+			MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+			ms.Write(imageBytes, 0, imageBytes.Length);
+			System.Drawing.Icon image = new System.Drawing.Icon(ms);
+			return image;
 		}
 
-		#region Codice generato da Progettazione Windows Form
+        #region Windows Form Designer generated code
 
-		/// <summary>
-		/// Metodo necessario per il supporto della finestra di progettazione. Non modificare
-		/// il contenuto del metodo con l'editor di codice.
-		/// </summary>
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
 		private void InitializeComponent()
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
@@ -54,9 +69,9 @@ namespace Mandelbrot
             this.paletteCombo = new System.Windows.Forms.ComboBox();
             this.optionsPanel.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // optionsPanel
-            // 
+            //
             this.optionsPanel.BackColor = System.Drawing.Color.White;
             this.optionsPanel.Controls.Add(this.statusInfoLabel);
             this.optionsPanel.Controls.Add(this.homeButton);
@@ -71,9 +86,9 @@ namespace Mandelbrot
             this.optionsPanel.Size = new System.Drawing.Size(210, 493);
             this.optionsPanel.TabIndex = 0;
             this.optionsPanel.Visible = false;
-            // 
+            //
             // statusInfoLabel
-            // 
+            //
             this.statusInfoLabel.AutoSize = true;
             this.statusInfoLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.statusInfoLabel.Location = new System.Drawing.Point(26, 13);
@@ -82,9 +97,9 @@ namespace Mandelbrot
             this.statusInfoLabel.Size = new System.Drawing.Size(43, 17);
             this.statusInfoLabel.TabIndex = 1;
             this.statusInfoLabel.Text = "label1";
-            // 
+            //
             // homeButton
-            // 
+            //
             this.homeButton.FlatAppearance.BorderSize = 0;
             this.homeButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
             this.homeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -97,9 +112,9 @@ namespace Mandelbrot
             this.homeButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.homeButton.UseVisualStyleBackColor = true;
             this.homeButton.Click += new System.EventHandler(this.homeButton_Click);
-            // 
+            //
             // saveButton
-            // 
+            //
             this.saveButton.FlatAppearance.BorderSize = 0;
             this.saveButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -112,9 +127,9 @@ namespace Mandelbrot
             this.saveButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-            // 
+            //
             // paletteCombo
-            // 
+            //
             this.paletteCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.paletteCombo.FormattingEnabled = true;
             this.paletteCombo.Location = new System.Drawing.Point(26, 109);
@@ -122,16 +137,16 @@ namespace Mandelbrot
             this.paletteCombo.Size = new System.Drawing.Size(170, 25);
             this.paletteCombo.TabIndex = 2;
             this.paletteCombo.SelectedIndexChanged += new System.EventHandler(this.paletteCombo_SelectedIndexChanged);
-            // 
+            //
             // Form1
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(671, 493);
             this.Controls.Add(this.optionsPanel);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            //this.Icon = ((System.Drawing.Icon)Base64ToImage((string)resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
@@ -158,4 +173,3 @@ namespace Mandelbrot
         private System.Windows.Forms.Button saveButton;
     }
 }
-

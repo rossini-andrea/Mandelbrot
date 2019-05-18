@@ -47,6 +47,9 @@ namespace Mandelbrot
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
+
+
+
 			m_scale = 0.01;
 			m_xcenter = -1;
 			m_ycenter = 0;
